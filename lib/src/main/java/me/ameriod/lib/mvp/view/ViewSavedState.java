@@ -5,7 +5,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.View;
 
-class ViewSavedState extends View.BaseSavedState {
+/**
+ * TODO move to the delegate package
+ */
+public class ViewSavedState extends View.BaseSavedState {
 
     public static final Parcelable.Creator<ViewSavedState> CREATOR =
             new Parcelable.Creator<ViewSavedState>() {
