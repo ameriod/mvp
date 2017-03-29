@@ -1,4 +1,4 @@
-package me.ameriod.lib.mvp.presenter;
+package me.ameriod.lib.mvp.presenter.rx2;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -6,22 +6,21 @@ import android.support.annotation.Nullable;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import me.ameriod.lib.mvp.scheduler.IObservableScheduler;
 import me.ameriod.lib.mvp.Mvp;
 
-public class BasePresenter<T extends Mvp.View> implements Mvp.Presenter<T> {
+public class BasePresenterRx2<T extends Mvp.View> implements Mvp.Presenter<T> {
 
     private T view;
     private CompositeDisposable compositeDisposable;
     @NonNull
-    private IObservableScheduler scheduler;
+    private IObservableSchedulerRx2 scheduler;
 
-    public BasePresenter(@NonNull IObservableScheduler scheduler) {
+    public BasePresenterRx2(@NonNull IObservableSchedulerRx2 scheduler) {
         this.scheduler = scheduler;
     }
 
-    public BasePresenter() {
-        this(IObservableScheduler.SUBSCRIBE_IO_OBSERVE_ANDROID_MAIN);
+    public BasePresenterRx2() {
+        this(IObservableSchedulerRx2.SUBSCRIBE_IO_OBSERVE_ANDROID_MAIN);
     }
 
     @Override
@@ -46,7 +45,7 @@ public class BasePresenter<T extends Mvp.View> implements Mvp.Presenter<T> {
     }
 
     @NonNull
-    public IObservableScheduler getScheduler() {
+    public IObservableSchedulerRx2 getScheduler() {
         return scheduler;
     }
 
@@ -65,7 +64,8 @@ public class BasePresenter<T extends Mvp.View> implements Mvp.Presenter<T> {
         compositeDisposable = null;
     }
 
-    protected T getView() {
+    @Override
+    public T getView() {
         return view;
     }
 }

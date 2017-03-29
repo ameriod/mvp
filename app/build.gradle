@@ -26,5 +26,13 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     testCompile 'junit:junit:4.12'
 
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
+
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.2.0'
+
     compile project (':lib')
+    compile project (':presenterRx2')
+    compile project (':presenterRx')
 }

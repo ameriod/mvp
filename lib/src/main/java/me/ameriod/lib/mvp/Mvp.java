@@ -41,6 +41,8 @@ public class Mvp {
          * Unbinds the view from the presenter
          */
         void detachView();
+
+        T getView();
     }
 
     /**
