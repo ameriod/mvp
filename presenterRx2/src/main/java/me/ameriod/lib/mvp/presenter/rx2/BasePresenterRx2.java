@@ -8,9 +8,9 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import me.ameriod.lib.mvp.Mvp;
 
-public class BasePresenterRx2<T extends Mvp.View> implements Mvp.Presenter<T> {
+public class BasePresenterRx2<V extends Mvp.View> implements Mvp.Presenter<V> {
 
-    private T view;
+    private V view;
     private CompositeDisposable compositeDisposable;
     @NonNull
     private IObservableSchedulerRx2 scheduler;
@@ -24,7 +24,7 @@ public class BasePresenterRx2<T extends Mvp.View> implements Mvp.Presenter<T> {
     }
 
     @Override
-    public void attachView(@NonNull T view) {
+    public void attachView(@NonNull V view) {
         this.view = view;
     }
 
@@ -65,7 +65,7 @@ public class BasePresenterRx2<T extends Mvp.View> implements Mvp.Presenter<T> {
     }
 
     @Override
-    public T getView() {
+    public V getView() {
         return view;
     }
 }
