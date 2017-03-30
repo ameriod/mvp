@@ -4,7 +4,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 public final class Rx2Espresso {
-    private static final String TAG = "RxEspresso";
+    private static final String TAG = "Rx2Espresso";
 
     private static Rx2Espresso INSTANCE;
     private int countingIdlingResource;
