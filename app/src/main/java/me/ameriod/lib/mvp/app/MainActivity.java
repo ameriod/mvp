@@ -20,8 +20,7 @@ public class MainActivity extends AppCompatActivity {
         router = Conductor.attachRouter(this, (ChangeHandlerFrameLayout)
                 findViewById(R.id.main_activity_controller_container), savedInstanceState);
         if (!router.hasRootController()) {
-            // TODO impl
-            //router.setRoot(RouterTransaction.with(new HomeController()));
+            router.setRoot(RouterTransaction.with(new HomeController()));
         }
     }
 

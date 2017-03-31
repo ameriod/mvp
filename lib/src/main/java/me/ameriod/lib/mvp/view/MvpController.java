@@ -3,7 +3,9 @@ package me.ameriod.lib.mvp.view;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.bluelinelabs.conductor.Controller;
 
@@ -15,12 +17,27 @@ public abstract class MvpController<V extends Mvp.View, P extends Mvp.Presenter<
     private P presenter;
 
     public MvpController() {
-        createPresenter();
     }
 
     public MvpController(@Nullable Bundle args) {
         super(args);
-        createPresenter();
+    }
+
+    @NonNull
+    protected abstract View inflateView(@NonNull LayoutInflater inflater, @NonNull ViewGroup container);
+
+    @NonNull
+    @Override
+    @SuppressWarnings("unchecked")
+    protected View onCreateView(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
+        View view = inflateView(inflater, container);
+        presenter = createPresenter();
+        presenter.attachView((V) this);
+        onPostCreateView(view, container);
+        return view;
+    }
+
+    protected void onPostCreateView(@NonNull View view, @NonNull ViewGroup container) {
     }
 
     @Override
@@ -30,29 +47,15 @@ public abstract class MvpController<V extends Mvp.View, P extends Mvp.Presenter<
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    protected void onAttach(@NonNull View view) {
-        super.onAttach(view);
-        presenter.attachView((V) this);
-    }
-
-    @Override
-    protected void onDetach(@NonNull View view) {
-        super.onDetach(view);
-        presenter.detachView();
-    }
-
-    @Override
     protected void onSaveViewState(@NonNull View view, @NonNull Bundle outState) {
         super.onSaveViewState(view, outState);
         presenter.saveState(outState);
     }
 
-
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        presenter = null;
+    protected void onDestroyView(@NonNull View view) {
+        super.onDestroyView(view);
+        presenter.detachView();
     }
 
     @NonNull

@@ -31,4 +31,6 @@ dependencies {
     compile 'com.bluelinelabs:conductor:2.1.1'
     compile 'com.bluelinelabs:conductor-support:2.1.1'
 
+    compile 'com.jakewharton.timber:timber:4.5.1'
+
 }
