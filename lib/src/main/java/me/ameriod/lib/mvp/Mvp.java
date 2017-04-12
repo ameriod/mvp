@@ -54,4 +54,11 @@ public class Mvp {
 
         void displayError(@Nullable String error);
     }
+
+    /**
+     * The interface to handle error messages
+     */
+    public interface ErrorHandler {
+        String onError(Throwable e);
+    }
 }

@@ -14,13 +14,12 @@ public class BasePresenterRx<V extends Mvp.View> implements Mvp.Presenter<V> {
     private CompositeSubscription compositeSubscription;
     @NonNull
     private IObservableSchedulerRx scheduler;
+    @NonNull
+    private Mvp.ErrorHandler errorHandler;
 
-    public BasePresenterRx(@NonNull IObservableSchedulerRx scheduler) {
+    public BasePresenterRx(@NonNull IObservableSchedulerRx scheduler, @NonNull Mvp.ErrorHandler errorHandler) {
         this.scheduler = scheduler;
-    }
-
-    public BasePresenterRx() {
-        this(IObservableSchedulerRx.SUBSCRIBE_IO_OBSERVE_ANDROID_MAIN);
+        this.errorHandler = errorHandler;
     }
 
     @Override
@@ -67,5 +66,10 @@ public class BasePresenterRx<V extends Mvp.View> implements Mvp.Presenter<V> {
     @Override
     public V getView() {
         return view;
+    }
+
+    @NonNull
+    public Mvp.ErrorHandler getErrorHandler() {
+        return errorHandler;
     }
 }

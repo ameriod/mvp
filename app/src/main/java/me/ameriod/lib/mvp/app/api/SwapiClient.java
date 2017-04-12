@@ -46,7 +46,7 @@ public class SwapiClient implements SwapiService {
 
     @Override
     public Observable<PeopleResponse> getNextPeople(@Query("page") @NonNull String page) {
-        return service.getPeople();
+        return service.getNextPeople(page);
     }
 
     @Override

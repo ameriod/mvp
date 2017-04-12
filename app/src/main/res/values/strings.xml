@@ -2,4 +2,6 @@
     <string name="app_name">app</string>
 
     <string name="home_people">People</string>
+
+    <string name="network_error">Network error. Please try again.</string>
 </resources>

@@ -17,6 +17,8 @@ public class PeopleContract {
 
     public interface Presenter extends Mvp.Presenter<View> {
          void getPeople();
+
+        void getMorePeople();
     }
 
     public interface Interactor {

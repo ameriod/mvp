@@ -14,7 +14,7 @@ public interface SwapiService {
   @GET("people")
   Observable<PeopleResponse> getPeople();
   
-  @GET
+  @GET("people")
   Observable<PeopleResponse> getNextPeople(@Query("page") @NonNull String page);
   
   @GET("people/{id}")
