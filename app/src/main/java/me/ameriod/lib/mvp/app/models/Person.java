@@ -9,7 +9,6 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
-import java.net.URI;
 import java.util.List;
 
 /**
@@ -73,7 +72,7 @@ public abstract class Person implements Parcelable {
 
     @Nullable
     @SerializedName("species")
-    abstract List<String> species();
+    public abstract List<String> species();
 
     @Nullable
     @SerializedName("starships")
@@ -86,6 +85,14 @@ public abstract class Person implements Parcelable {
     @Nullable
     @SerializedName("vehicles")
     public abstract List<String> vehicles();
+
+    public final String getSpecies() {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0, size = species().size(); i < size; i++) {
+            builder.append(species().get(i)).append(" ");
+        }
+        return builder.toString();
+    }
 
     public final String getId() {
         return Uri.parse(url()).getLastPathSegment();

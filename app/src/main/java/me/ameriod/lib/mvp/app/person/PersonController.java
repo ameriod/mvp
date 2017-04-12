@@ -7,6 +7,7 @@ import android.support.v4.widget.ContentLoadingProgressBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.BindView;
@@ -21,6 +22,10 @@ public class PersonController extends BaseControllerMvp<PersonContract.View, Per
 
     @BindView(R.id.person_loading_view)
     ContentLoadingProgressBar loading;
+    @BindView(R.id.person_tv_name)
+    TextView tvName;
+    @BindView(R.id.person_tv_species)
+    TextView tvSpecies;
 
     private String mId;
 
@@ -42,7 +47,8 @@ public class PersonController extends BaseControllerMvp<PersonContract.View, Per
 
     @Override
     public void setPerson(@NonNull Person person) {
-
+        tvName.setText(person.name());
+        tvSpecies.setText(person.getSpecies());
     }
 
     @NonNull
