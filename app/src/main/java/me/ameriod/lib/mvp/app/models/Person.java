@@ -1,5 +1,6 @@
 package me.ameriod.lib.mvp.app.models;
 
+import android.net.Uri;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 
@@ -8,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
+import java.net.URI;
 import java.util.List;
 
 /**
@@ -84,4 +86,8 @@ public abstract class Person implements Parcelable {
     @Nullable
     @SerializedName("vehicles")
     public abstract List<String> vehicles();
+
+    public final String getId() {
+        return Uri.parse(url()).getLastPathSegment();
+    }
 }

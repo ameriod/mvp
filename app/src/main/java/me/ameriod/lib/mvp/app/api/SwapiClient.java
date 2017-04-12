@@ -7,6 +7,7 @@ import com.google.gson.GsonBuilder;
 
 import io.reactivex.Observable;
 import me.ameriod.lib.mvp.app.models.PeopleResponse;
+import me.ameriod.lib.mvp.app.models.Person;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -50,7 +51,7 @@ public class SwapiClient implements SwapiService {
     }
 
     @Override
-    public Observable<PeopleResponse> getPerson(@NonNull String id) {
+    public Observable<Person> getPerson(@NonNull String id) {
         return service.getPerson(id);
     }
 }

@@ -9,19 +9,6 @@ public interface IObservableSchedulerRx {
 
     <T> Observable.Transformer<T, T> scheduleObservable();
 
-    Action0 DECREMENT = new Action0() {
-        @Override
-        public void call() {
-            RxEspresso.getInstance().decrement();
-        }
-    };
-    Action0 INCREMENT = new Action0() {
-        @Override
-        public void call() {
-            RxEspresso.getInstance().increment();
-        }
-    };
-
     IObservableSchedulerRx SUBSCRIBE_COMPUTATION_OBSERVE_ANDROID_MAIN = new IObservableSchedulerRx() {
         @Override
         public <T> Observable.Transformer<T, T> scheduleObservable() {
@@ -30,9 +17,7 @@ public interface IObservableSchedulerRx {
                 public Observable<T> call(Observable<T> observable) {
                     return observable
                             .subscribeOn(Schedulers.computation())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .doAfterTerminate(DECREMENT)
-                            .doOnSubscribe(INCREMENT);
+                            .observeOn(AndroidSchedulers.mainThread());
                 }
             };
         }
@@ -46,9 +31,7 @@ public interface IObservableSchedulerRx {
                 public Observable<T> call(Observable<T> observable) {
                     return observable
                             .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .doAfterTerminate(DECREMENT)
-                            .doOnSubscribe(INCREMENT);
+                            .observeOn(AndroidSchedulers.mainThread());
                 }
             };
         }
@@ -62,9 +45,7 @@ public interface IObservableSchedulerRx {
                 public Observable<T> call(Observable<T> observable) {
                     return observable
                             .subscribeOn(Schedulers.io())
-                            .observeOn(Schedulers.io())
-                            .doAfterTerminate(DECREMENT)
-                            .doOnSubscribe(INCREMENT);
+                            .observeOn(Schedulers.io());
                 }
             };
         }
@@ -78,9 +59,7 @@ public interface IObservableSchedulerRx {
                 public Observable<T> call(Observable<T> observable) {
                     return observable
                             .subscribeOn(Schedulers.computation())
-                            .observeOn(Schedulers.computation())
-                            .doAfterTerminate(DECREMENT)
-                            .doOnSubscribe(INCREMENT);
+                            .observeOn(Schedulers.computation());
                 }
             };
         }
@@ -94,9 +73,7 @@ public interface IObservableSchedulerRx {
                 public Observable<T> call(Observable<T> observable) {
                     return observable
                             .subscribeOn(Schedulers.immediate())
-                            .observeOn(Schedulers.immediate())
-                            .doAfterTerminate(DECREMENT)
-                            .doOnSubscribe(INCREMENT);
+                            .observeOn(Schedulers.immediate());
                 }
             };
         }
@@ -110,9 +87,7 @@ public interface IObservableSchedulerRx {
                 public Observable<T> call(Observable<T> observable) {
                     return observable
                             .subscribeOn(Schedulers.trampoline())
-                            .observeOn(Schedulers.trampoline())
-                            .doAfterTerminate(DECREMENT)
-                            .doOnSubscribe(INCREMENT);
+                            .observeOn(Schedulers.trampoline());
                 }
             };
         }

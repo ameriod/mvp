@@ -9,6 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.bluelinelabs.conductor.RouterTransaction;
+import com.bluelinelabs.conductor.changehandler.HorizontalChangeHandler;
 
 import java.util.List;
 
@@ -17,6 +21,7 @@ import me.ameriod.lib.mvp.app.BaseControllerMvp;
 import me.ameriod.lib.mvp.app.R;
 import me.ameriod.lib.mvp.app.RecyclerViewEndlessScrollListener;
 import me.ameriod.lib.mvp.app.models.Person;
+import me.ameriod.lib.mvp.app.person.PersonController;
 
 public class PeopleController extends BaseControllerMvp<PeopleContract.View, PeopleContract.Presenter>
         implements PeopleContract.View, PeopleAdapter.OnPersonClickedListener,
@@ -69,7 +74,7 @@ public class PeopleController extends BaseControllerMvp<PeopleContract.View, Peo
 
     @Override
     public void displayError(@Nullable String error) {
-
+        Toast.makeText(getApplicationContext(), error, Toast.LENGTH_LONG).show();
     }
 
     @NonNull
@@ -80,7 +85,9 @@ public class PeopleController extends BaseControllerMvp<PeopleContract.View, Peo
 
     @Override
     public void onPersonClicked(@NonNull View view, Person person) {
-
+        getRouter().pushController(RouterTransaction.with(PersonController.newInstance(person.getId()))
+                .pushChangeHandler(new HorizontalChangeHandler())
+                .popChangeHandler(new HorizontalChangeHandler()));
     }
 
     @Override
