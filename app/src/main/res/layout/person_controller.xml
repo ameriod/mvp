@@ -4,29 +4,111 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingBottom="8dp"
-        android:paddingEnd="16dp"
-        android:paddingStart="16dp"
-        android:paddingTop="8dp">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/person_tv_name"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            tools:text="Jar Jar Binks"/>
+            android:orientation="vertical"
+            android:paddingBottom="8dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp">
 
-        <TextView
-            android:id="@+id/person_tv_species"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            tools:text="Human"/>
-    </LinearLayout>
+            <TextView
+                android:id="@+id/person_tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                tools:text="Jar Jar Binks"/>
+
+            <TextView
+                android:id="@+id/person_tv_mass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                tools:text="160"/>
+
+            <TextView
+                android:id="@+id/person_tv_eye_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                tools:text="Blue"/>
+
+            <TextView
+                android:id="@+id/person_tv_skin_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                tools:text="White"/>
+
+            <TextView
+                android:id="@+id/person_tv_hair_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                tools:text="Brown"/>
+
+            <TextView
+                android:id="@+id/person_tv_birth_year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                tools:text="3056"/>
+
+            <TextView
+                android:id="@+id/person_tv_height"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                tools:text="1.7"/>
+
+            <TextView
+                android:id="@+id/person_tv_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                tools:text="male"/>
+
+            <TextView
+                android:id="@+id/person_tv_species"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                tools:text="Human"/>
+
+            <TextView
+                android:id="@+id/person_tv_home_world"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                tools:text="Earth"/>
+
+            <TextView
+                android:id="@+id/person_tv_films"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                tools:text="A New Hope"/>
+
+            <TextView
+                android:id="@+id/person_tv_star_ships"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                tools:text="X-wing"/>
+
+            <TextView
+                android:id="@+id/person_tv_vehicles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                tools:text="Pod Racer"/>
+        </LinearLayout>
+    </ScrollView>
 
     <android.support.v4.widget.ContentLoadingProgressBar
         android:id="@+id/person_loading_view"

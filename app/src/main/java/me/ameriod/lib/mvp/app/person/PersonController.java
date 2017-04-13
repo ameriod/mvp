@@ -26,6 +26,28 @@ public class PersonController extends BaseControllerMvp<PersonContract.View, Per
     TextView tvName;
     @BindView(R.id.person_tv_species)
     TextView tvSpecies;
+    @BindView(R.id.person_tv_mass)
+    TextView tvMass;
+    @BindView(R.id.person_tv_eye_color)
+    TextView tvEyeColor;
+    @BindView(R.id.person_tv_skin_color)
+    TextView tvSkinColor;
+    @BindView(R.id.person_tv_hair_color)
+    TextView tvHairColor;
+    @BindView(R.id.person_tv_birth_year)
+    TextView tvBirthYear;
+    @BindView(R.id.person_tv_height)
+    TextView tvHeight;
+    @BindView(R.id.person_tv_gender)
+    TextView tvGender;
+    @BindView(R.id.person_tv_home_world)
+    TextView tvHomeWorld;
+    @BindView(R.id.person_tv_films)
+    TextView tvFilms;
+    @BindView(R.id.person_tv_star_ships)
+    TextView tvStarShips;
+    @BindView(R.id.person_tv_vehicles)
+    TextView tvVehicles;
 
     private String mId;
 
@@ -49,6 +71,17 @@ public class PersonController extends BaseControllerMvp<PersonContract.View, Per
     public void setPerson(@NonNull Person person) {
         tvName.setText(person.name());
         tvSpecies.setText(person.getSpecies());
+        tvBirthYear.setText(person.birthYear());
+        tvEyeColor.setText(person.eyeColor());
+        tvFilms.setText(person.getFilms());
+        tvGender.setText(person.gender());
+        tvHairColor.setText(person.hairColor());
+        tvSkinColor.setText(person.skinColor());
+        tvHeight.setText(person.height());
+        tvHomeWorld.setText(person.homeworld());
+        tvMass.setText(person.mass());
+        tvStarShips.setText(person.getStarShips());
+        tvVehicles.setText(person.getVehicles());
     }
 
     @NonNull

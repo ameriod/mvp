@@ -94,6 +94,30 @@ public abstract class Person implements Parcelable {
         return builder.toString();
     }
 
+    public final String getVehicles() {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0, size = vehicles().size(); i < size; i++) {
+            builder.append(vehicles().get(i)).append(" ");
+        }
+        return builder.toString();
+    }
+
+    public final String getStarShips() {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0, size = starships().size(); i < size; i++) {
+            builder.append(starships().get(i)).append(" ");
+        }
+        return builder.toString();
+    }
+
+    public final String getFilms() {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0, size = films().size(); i < size; i++) {
+            builder.append(films().get(i)).append(" ");
+        }
+        return builder.toString();
+    }
+
     public final String getId() {
         return Uri.parse(url()).getLastPathSegment();
     }
