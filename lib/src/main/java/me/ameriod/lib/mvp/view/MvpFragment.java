@@ -7,41 +7,44 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import me.ameriod.lib.mvp.Mvp;
+import me.ameriod.lib.mvp.view.deligate.FragmentDelegate;
+import me.ameriod.lib.mvp.view.deligate.FragmentDelegateCallback;
+import me.ameriod.lib.mvp.view.deligate.FragmentDelegateImpl;
 
 public abstract class MvpFragment<V extends Mvp.View, P extends Mvp.Presenter<V>> extends Fragment
-        implements Mvp.View {
+        implements Mvp.View, FragmentDelegateCallback<V, P> {
 
     protected P presenter;
+    private FragmentDelegate<V, P> fragmentDelegate;
 
     @Override
     @SuppressWarnings("unchecked")
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (presenter == null) {
-            presenter = createPresenter();
+        if (fragmentDelegate == null) {
+            fragmentDelegate = new FragmentDelegateImpl<>(this);
         }
-        presenter.attachView((V) this);
-        if (savedInstanceState != null) {
-            presenter.restoreState(savedInstanceState);
-        }
+        fragmentDelegate.onViewCreated(savedInstanceState);
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        presenter.saveState(outState);
+        fragmentDelegate.onSaveInstanceState(outState);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        presenter.detachView();
+        fragmentDelegate.onDestroyView();
     }
 
     @NonNull
-    protected abstract P createPresenter();
+    @Override
+    public abstract P createPresenter();
 
-    protected P getPresenter() {
-        return presenter;
+    @Override
+    public P getPresenter() {
+        return fragmentDelegate.getPresenter();
     }
 }
