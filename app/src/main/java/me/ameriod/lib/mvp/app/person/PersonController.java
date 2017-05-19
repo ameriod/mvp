@@ -112,7 +112,7 @@ public class PersonController extends BaseControllerMvp<PersonContract.View, Per
 
     @NonNull
     @Override
-    protected PersonContract.Presenter createPresenter() {
+    public PersonContract.Presenter createPresenter() {
         return PersonPresenter.newInstance(getApplicationContext(), mId);
     }
 }

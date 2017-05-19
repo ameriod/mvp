@@ -77,6 +77,12 @@ public abstract class MvpRelativeLayout<V extends Mvp.View, P extends Mvp.Presen
     public abstract P createPresenter();
 
     @Override
+    @SuppressWarnings("unchecked")
+    public V getMvpView() {
+        return (V) this;
+    }
+
+    @Override
     public P getPresenter() {
         return delegate.getPresenter();
     }

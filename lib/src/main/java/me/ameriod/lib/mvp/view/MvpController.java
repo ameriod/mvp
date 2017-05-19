@@ -10,11 +10,16 @@ import android.view.ViewGroup;
 import com.bluelinelabs.conductor.Controller;
 
 import me.ameriod.lib.mvp.Mvp;
+import me.ameriod.lib.mvp.view.deligate.ControllerDelegate;
+import me.ameriod.lib.mvp.view.deligate.ControllerDelegateCallback;
+import me.ameriod.lib.mvp.view.deligate.ControllerDelegateImpl;
+import me.ameriod.lib.mvp.view.deligate.FragmentDelegate;
 
 public abstract class MvpController<V extends Mvp.View, P extends Mvp.Presenter<V>> extends Controller
-        implements Mvp.View {
+        implements Mvp.View, ControllerDelegateCallback<V, P> {
 
-    private P presenter;
+    protected P presenter;
+    private ControllerDelegate<V, P> controllerDelegate;
 
     public MvpController() {
     }
@@ -31,8 +36,10 @@ public abstract class MvpController<V extends Mvp.View, P extends Mvp.Presenter<
     @SuppressWarnings("unchecked")
     protected View onCreateView(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
         View view = inflateView(inflater, container);
-        presenter = createPresenter();
-        presenter.attachView((V) this);
+        if (controllerDelegate == null) {
+            controllerDelegate = new ControllerDelegateImpl<>(this);
+        }
+        controllerDelegate.onCreateView();
         onPostCreateView(view, container);
         return view;
     }
@@ -43,25 +50,31 @@ public abstract class MvpController<V extends Mvp.View, P extends Mvp.Presenter<
     @Override
     protected void onRestoreViewState(@NonNull View view, @NonNull Bundle savedViewState) {
         super.onRestoreViewState(view, savedViewState);
-        presenter.restoreState(savedViewState);
+        controllerDelegate.onRestoreViewState(savedViewState);
     }
 
     @Override
     protected void onSaveViewState(@NonNull View view, @NonNull Bundle outState) {
         super.onSaveViewState(view, outState);
-        presenter.saveState(outState);
+        controllerDelegate.onSaveViewState(outState);
     }
 
     @Override
     protected void onDestroyView(@NonNull View view) {
         super.onDestroyView(view);
-        presenter.detachView();
+        controllerDelegate.onDestroyView();
     }
 
     @NonNull
-    protected abstract P createPresenter();
+    public abstract P createPresenter();
 
-    protected P getPresenter() {
-        return presenter;
+    public P getPresenter() {
+        return controllerDelegate.getPresenter();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public V getMvpView() {
+        return (V) this;
     }
 }

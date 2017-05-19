@@ -47,4 +47,10 @@ public abstract class MvpFragment<V extends Mvp.View, P extends Mvp.Presenter<V>
     public P getPresenter() {
         return fragmentDelegate.getPresenter();
     }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public V getMvpView() {
+        return (V) this;
+    }
 }

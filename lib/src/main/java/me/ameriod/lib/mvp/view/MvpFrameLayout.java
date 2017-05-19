@@ -82,6 +82,12 @@ public abstract class MvpFrameLayout<V extends Mvp.View, P extends Mvp.Presenter
     }
 
     @Override
+    @SuppressWarnings("unchecked")
+    public V getMvpView() {
+        return (V) this;
+    }
+
+    @Override
     public Parcelable superOnSaveInstanceState() {
         return super.onSaveInstanceState();
     }
