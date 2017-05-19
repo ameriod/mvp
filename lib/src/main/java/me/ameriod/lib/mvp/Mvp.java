@@ -41,6 +41,8 @@ public class Mvp {
          * Unbinds the view from the presenter
          */
         void detachView();
+
+        T getView();
     }
 
     /**
@@ -51,5 +53,12 @@ public class Mvp {
         void showProgress(boolean show);
 
         void displayError(@Nullable String error);
+    }
+
+    /**
+     * The interface to handle error messages
+     */
+    public interface ErrorHandler {
+        String onError(Throwable e);
     }
 }
