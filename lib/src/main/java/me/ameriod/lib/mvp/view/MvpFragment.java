@@ -14,7 +14,6 @@ import me.ameriod.lib.mvp.view.deligate.FragmentDelegateImpl;
 public abstract class MvpFragment<V extends Mvp.View, P extends Mvp.Presenter<V>> extends Fragment
         implements Mvp.View, FragmentDelegateCallback<V, P> {
 
-    protected P presenter;
     private FragmentDelegate<V, P> fragmentDelegate;
 
     @Override
