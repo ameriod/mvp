@@ -1,64 +1,62 @@
-package me.ameriod.lib.mvp;
+package me.ameriod.lib.mvp
 
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.os.Bundle
 
 /**
  * The base interfaces for the Presenter and the View.
  */
-public class Mvp {
+interface Mvp {
 
     /**
      * The presenter interface
-     *
-     * @param <T> of a {@link Mvp.View}
-     */
-    public interface Presenter<T extends Mvp.View> {
+
+     * @param <T> of a [Mvp.View]
+    </T> */
+    interface Presenter<T : Mvp.View> {
 
         /**
          * Binds the view to the presenter
-         *
+
          * @param view for the presenter
          */
-        void attachView(@NonNull T view);
+        fun attachView(view: T)
 
         /**
          * Restores the state from the android component
-         *
+
          * @param savedState from the android component
          */
-        void restoreState(@NonNull Bundle savedState);
+        fun restoreState(savedState: Bundle)
 
         /**
          * Saves the sate of the presenter to the android component
-         *
+
          * @param outState to save the state from the android component
          */
-        void saveState(@NonNull Bundle outState);
+        fun saveState(outState: Bundle)
 
         /**
          * Unbinds the view from the presenter
          */
-        void detachView();
+        fun detachView()
 
-        T getView();
+        val view: T
     }
 
     /**
      * The View interface
      */
-    public interface View {
+    interface View {
 
-        void showProgress(boolean show);
+        fun showProgress(show: Boolean)
 
-        void displayError(@Nullable String error);
+        fun displayError(error: String)
     }
 
     /**
      * The interface to handle error messages
      */
-    public interface ErrorHandler {
-        String onError(Throwable e);
+    interface ErrorHandler {
+        fun onError(e: Throwable): String
     }
 }
