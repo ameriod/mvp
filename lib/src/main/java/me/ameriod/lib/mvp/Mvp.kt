@@ -40,7 +40,7 @@ interface Mvp {
          */
         fun detachView()
 
-        val view: T
+        fun getView(): T
     }
 
     /**

@@ -29,7 +29,7 @@ public class PersonPresenter extends BasePresenterRx2<PersonContract.View> imple
     }
 
     public static PersonPresenter newInstance(@NonNull Context context, @NonNull String id) {
-        return new PersonPresenter(IObservableSchedulerRx2.SUBSCRIBE_IO_OBSERVE_ANDROID_MAIN,
+        return new PersonPresenter(IObservableSchedulerRx2.Companion.getSUBSCRIBE_IO_OBSERVE_ANDROID_MAIN(),
                 new NetworkErrorHandler(context), new PersonInteractor(id));
     }
 
