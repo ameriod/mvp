@@ -52,7 +52,7 @@ ext {
     conductor= "com.bluelinelabs:conductor:$conductorVersion"
     conductorSupport = "com.bluelinelabs:conductor-support:$conductorVersion"
 
-    gson = "com.google.code.gson:gson:2.7"
+    gson = "com.google.code.gson:gson:2.8.0"
 
     retrofit2Version = "2.3.0"
     retrofit2 = "com.squareup.retrofit2:retrofit:$retrofit2Version"
