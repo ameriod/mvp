@@ -7,13 +7,15 @@ import android.os.Build
 import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 
 import me.ameriod.lib.mvp.Mvp
 import me.ameriod.lib.mvp.deligate.ViewGroupDelegateImpl
 import me.ameriod.lib.mvp.deligate.ViewGroupMvpDelegateCallback
 import me.ameriod.lib.mvp.deligate.ViewMvpDelegate
 
-abstract class MvpRelativeLayout<V : Mvp.View, P : Mvp.Presenter<V>> : ViewGroup, Mvp.View, ViewGroupMvpDelegateCallback<V, P> {
+abstract class MvpRelativeLayout<V : Mvp.View, P : Mvp.Presenter<V>> : RelativeLayout, Mvp.View,
+        ViewGroupMvpDelegateCallback<V, P> {
 
     private var delegate: ViewMvpDelegate<V, P>? = null
 

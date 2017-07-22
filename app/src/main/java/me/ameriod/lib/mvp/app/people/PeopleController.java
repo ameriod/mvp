@@ -85,7 +85,7 @@ public class PeopleController extends BaseControllerMvp<PeopleContract.View, Peo
 
     @Override
     public void onPersonClicked(@NonNull View view, Person person) {
-        getRouter().pushController(RouterTransaction.with(PersonController.newInstance(person.getId()))
+        getRouter().pushController(RouterTransaction.with(PersonController.Companion.newInstance(person.getId()))
                 .pushChangeHandler(new HorizontalChangeHandler())
                 .popChangeHandler(new HorizontalChangeHandler()));
     }

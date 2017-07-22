@@ -58,7 +58,6 @@ dependencies {
     compile rootProject.ext.okHttp
     compile rootProject.ext.okHttpLogging
 
-
     compile project(':lib')
     compile project(':presenterRx2')
     //compile project(':presenterRx')
