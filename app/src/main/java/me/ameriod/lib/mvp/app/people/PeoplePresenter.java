@@ -3,7 +3,6 @@ package me.ameriod.lib.mvp.app.people;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 
@@ -16,7 +15,6 @@ import me.ameriod.lib.mvp.app.models.PeopleResponse;
 import me.ameriod.lib.mvp.app.models.Person;
 import me.ameriod.lib.mvp.presenter.rx2.BasePresenterRx2;
 import me.ameriod.lib.mvp.presenter.rx2.IObservableSchedulerRx2;
-import timber.log.Timber;
 
 public class PeoplePresenter extends BasePresenterRx2<PeopleContract.View> implements PeopleContract.Presenter {
 
@@ -37,7 +35,7 @@ public class PeoplePresenter extends BasePresenterRx2<PeopleContract.View> imple
     }
 
     public static PeoplePresenter newInstance(@NonNull Context context) {
-        return new PeoplePresenter(IObservableSchedulerRx2.SUBSCRIBE_IO_OBSERVE_ANDROID_MAIN,
+        return new PeoplePresenter(IObservableSchedulerRx2.Companion.getSUBSCRIBE_IO_OBSERVE_ANDROID_MAIN(),
                 new NetworkErrorHandler(context), new PeopleInteractor());
     }
 
@@ -48,7 +46,7 @@ public class PeoplePresenter extends BasePresenterRx2<PeopleContract.View> imple
     }
 
     @Override
-    public void restoreState(@Nullable Bundle bundle) {
+    public void restoreState(@NonNull Bundle bundle) {
         super.restoreState(bundle);
         Icepick.restoreInstanceState(this, bundle);
     }

@@ -1,12 +1,14 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    ext.kotlin_version = '1.1.2-4'
     repositories {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.2'
+        classpath 'com.android.tools.build:gradle:2.3.3'
         classpath 'com.jakewharton:butterknife-gradle-plugin:8.5.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -22,4 +24,44 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+    compileSdkVersion = 25
+    buildToolsVersion = "25.0.3"
+    minSdkVersion = 16
+    targetSdkVersion = 25
+    versionCode = 1
+    versionName = "1.0"
+
+    supportLibVersion = "25.3.1"
+
+    espresso = "com.android.support.test.espresso:espresso-core:2.2.2"
+    junit = "junit:junit:4.12"
+    mockito = "org.mockito:mockito-core:2.8.9"
+
+    rxJava = "io.reactivex:rxjava:1.2.9"
+    rxJavaAndroid = "io.reactivex:rxandroid:1.2.1"
+
+    rxJava2 = "io.reactivex.rxjava2:rxjava:2.0.7"
+    rxJava2Android = "io.reactivex.rxjava2:rxandroid:2.0.1"
+
+    timber = "com.jakewharton.timber:timber:4.5.1"
+
+    conductorVersion = "2.1.1"
+    conductor= "com.bluelinelabs:conductor:$conductorVersion"
+    conductorSupport = "com.bluelinelabs:conductor-support:$conductorVersion"
+
+    gson = "com.google.code.gson:gson:2.8.0"
+
+    retrofit2Version = "2.3.0"
+    retrofit2 = "com.squareup.retrofit2:retrofit:$retrofit2Version"
+    retrofit2ConverterGson = "com.squareup.retrofit2:converter-gson:$retrofit2Version"
+    retrofit2AdapterRxJava = "com.squareup.retrofit2:adapter-rxjava:$retrofit2Version"
+    retrofit2AdapterRxJava2 = "com.squareup.retrofit2:adapter-rxjava2:$retrofit2Version"
+
+    okHttp3Version = "3.8.0"
+    okHttp = "com.squareup.okhttp3:okhttp:$okHttp3Version"
+    okHttpLogging = "com.squareup.okhttp3:logging-interceptor:$okHttp3Version"
+    okHttpMockWebServer = "com.squareup.okhttp3:mockwebserver:$okHttp3Version"
 }
