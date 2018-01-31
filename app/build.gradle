@@ -60,5 +60,4 @@ dependencies {
 
     compile project(':lib')
     compile project(':presenterRx2')
-    //compile project(':presenterRx')
 }
