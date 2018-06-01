@@ -1,7 +1,7 @@
 package me.ameriod.lib.mvp.app.people;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 
 import java.net.URL;
 import java.net.URLDecoder;

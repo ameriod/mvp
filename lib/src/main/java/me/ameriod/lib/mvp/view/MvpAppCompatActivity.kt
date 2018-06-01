@@ -1,7 +1,7 @@
 package me.ameriod.lib.mvp.view
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 
 import me.ameriod.lib.mvp.Mvp
 import me.ameriod.lib.mvp.deligate.ActivityDelegate

@@ -34,8 +34,6 @@ ext {
     versionCode = 1
     versionName = "1.0"
 
-    supportLibVersion = "27.1.1"
-
     espresso = "com.android.support.test.espresso:espresso-core:2.2.2"
     junit = "junit:junit:4.12"
     mockito = "org.mockito:mockito-core:2.8.9"

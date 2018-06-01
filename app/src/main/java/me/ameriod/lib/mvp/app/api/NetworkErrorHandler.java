@@ -1,7 +1,7 @@
 package me.ameriod.lib.mvp.app.api;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import me.ameriod.lib.mvp.Mvp;
 import me.ameriod.lib.mvp.app.R;

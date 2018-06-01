@@ -1,7 +1,7 @@
 package me.ameriod.lib.mvp.view
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.View
 
 import me.ameriod.lib.mvp.Mvp
@@ -9,7 +9,7 @@ import me.ameriod.lib.mvp.deligate.FragmentDelegate
 import me.ameriod.lib.mvp.deligate.FragmentDelegateCallback
 import me.ameriod.lib.mvp.deligate.FragmentDelegateImpl
 
-abstract class MvpFragment<V : Mvp.View, out P : Mvp.Presenter<V>> : Fragment(), Mvp.View,
+abstract class MvpFragment<V : Mvp.View, out P : Mvp.Presenter<V>> : androidx.fragment.app.Fragment(), Mvp.View,
         FragmentDelegateCallback<V, P> {
 
     private var fragmentDelegate: FragmentDelegate<V, P>? = null

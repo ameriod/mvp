@@ -11,7 +11,7 @@ android {
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
     buildTypes {
@@ -23,13 +23,11 @@ android {
 }
 
 dependencies {
-    androidTestImplementation(rootProject.ext.espresso, {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha3'
     testImplementation rootProject.ext.junit
     testImplementation rootProject.ext.mockito
 
-    implementation "com.android.support:appcompat-v7:$rootProject.ext.supportLibVersion"
+    implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
 
     implementation rootProject.ext.conductor
     implementation rootProject.ext.conductorSupport

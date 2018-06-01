@@ -1,11 +1,6 @@
 package me.ameriod.lib.mvp.app.people;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +11,11 @@ import com.bluelinelabs.conductor.changehandler.HorizontalChangeHandler;
 
 import java.util.List;
 
-import butterknife.BindView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import me.ameriod.lib.mvp.app.BaseControllerMvp;
 import me.ameriod.lib.mvp.app.R;
 import me.ameriod.lib.mvp.app.RecyclerViewEndlessScrollListener;
@@ -27,10 +26,8 @@ public class PeopleController extends BaseControllerMvp<PeopleContract.View, Peo
         implements PeopleContract.View, PeopleAdapter.OnPersonClickedListener,
         RecyclerViewEndlessScrollListener.OnScrollToEndListener {
 
-    @BindView(R.id.people_recycler_view)
-    RecyclerView recyclerView;
-    @BindView(R.id.people_loading_view)
-    View loading;
+    private RecyclerView recyclerView;
+    private View loading;
 
     private PeopleAdapter adapter;
 
@@ -41,7 +38,10 @@ public class PeopleController extends BaseControllerMvp<PeopleContract.View, Peo
     @NonNull
     @Override
     protected View inflateView(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
-        return inflater.inflate(R.layout.people_controller, container, false);
+        View v = inflater.inflate(R.layout.people_controller, container, false);
+        recyclerView = v.findViewById(R.id.people_recycler_view);
+        loading = v.findViewById(R.id.people_loading_view);
+        return v;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package me.ameriod.lib.mvp.app.people;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.util.List;
 

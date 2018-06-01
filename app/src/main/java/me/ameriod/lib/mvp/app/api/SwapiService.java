@@ -1,6 +1,6 @@
 package me.ameriod.lib.mvp.app.api;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import io.reactivex.Observable;
 import me.ameriod.lib.mvp.app.models.PeopleResponse;
