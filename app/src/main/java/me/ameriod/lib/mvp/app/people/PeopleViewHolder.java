@@ -21,6 +21,6 @@ public class PeopleViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setup(@NonNull Person person) {
-        tvName.setText(person.name());
+        tvName.setText(person.getName());
     }
 }

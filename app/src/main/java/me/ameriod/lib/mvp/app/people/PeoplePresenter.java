@@ -6,8 +6,6 @@ import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 
-import icepick.Icepick;
-import icepick.State;
 import io.reactivex.functions.Consumer;
 import me.ameriod.lib.mvp.Mvp;
 import me.ameriod.lib.mvp.app.api.NetworkErrorHandler;
@@ -21,9 +19,7 @@ public class PeoplePresenter extends BasePresenterRx2<PeopleContract.View> imple
     @NonNull
     private final PeopleContract.Interactor interactor;
 
-    @State
     ArrayList<Person> people;
-    @State
     String nextUrl;
 
     private String urlLoading;
@@ -42,13 +38,11 @@ public class PeoplePresenter extends BasePresenterRx2<PeopleContract.View> imple
     @Override
     public void saveState(@NonNull Bundle bundle) {
         super.saveState(bundle);
-        Icepick.saveInstanceState(this, bundle);
     }
 
     @Override
     public void restoreState(@NonNull Bundle bundle) {
         super.restoreState(bundle);
-        Icepick.restoreInstanceState(this, bundle);
     }
 
     @Override
@@ -60,8 +54,8 @@ public class PeoplePresenter extends BasePresenterRx2<PeopleContract.View> imple
                     .subscribe(new Consumer<PeopleResponse>() {
                         @Override
                         public void accept(@NonNull PeopleResponse peopleResponse) throws Exception {
-                            people = new ArrayList<>(peopleResponse.results());
-                            nextUrl = peopleResponse.next();
+                            people = new ArrayList<>(peopleResponse.getResults());
+                            nextUrl = peopleResponse.getNext();
                             getView().setPeople(people);
                             getView().showProgress(false);
                         }
@@ -91,8 +85,8 @@ public class PeoplePresenter extends BasePresenterRx2<PeopleContract.View> imple
                 .subscribe(new Consumer<PeopleResponse>() {
                     @Override
                     public void accept(@NonNull PeopleResponse peopleResponse) throws Exception {
-                        people.addAll(peopleResponse.results());
-                        nextUrl = peopleResponse.next();
+                        people.addAll(peopleResponse.getResults());
+                        nextUrl = peopleResponse.getNext();
                         getView().setPeople(people);
                         getView().showProgress(false);
                     }

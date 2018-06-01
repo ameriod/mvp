@@ -3,7 +3,6 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
@@ -23,14 +22,15 @@ android {
 }
 
 dependencies {
-    androidTestCompile(rootProject.ext.espresso, {
+    androidTestImplementation(rootProject.ext.espresso, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testCompile rootProject.ext.junit
-    testCompile rootProject.ext.mockito
+    testImplementation rootProject.ext.junit
+    testImplementation rootProject.ext.mockito
 
-    compile rootProject.ext.rxJava2
-    compile rootProject.ext.rxJava2Android
+    implementation rootProject.ext.rxJava2
+    implementation rootProject.ext.rxJava2Android
 
-    compile project (':lib')
+    implementation project (':lib')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

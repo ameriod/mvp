@@ -3,7 +3,6 @@ package me.ameriod.lib.mvp.presenter.rx2
 import io.reactivex.ObservableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import io.reactivex.schedulers.TestScheduler
 
 interface IObservableSchedulerRx2 {
 
@@ -24,8 +23,7 @@ interface IObservableSchedulerRx2 {
         val SUBSCRIBE_COMPUTATION_OBSERVE_ANDROID_MAIN: IObservableSchedulerRx2 = object : IObservableSchedulerRx2 {
             override fun <T> schedule(): ObservableTransformer<T, T> {
                 return ObservableTransformer { upstream ->
-                    upstream
-                            .subscribeOn(Schedulers.computation())
+                    upstream.subscribeOn(Schedulers.computation())
                             .observeOn(AndroidSchedulers.mainThread())
                 }
             }
@@ -34,7 +32,6 @@ interface IObservableSchedulerRx2 {
         val TRAMPOLINE: IObservableSchedulerRx2 = object : IObservableSchedulerRx2 {
             override fun <T> schedule(): ObservableTransformer<T, T> {
                 return ObservableTransformer { upstream ->
-                    val scheduler = TestScheduler()
                     upstream.subscribeOn(Schedulers.trampoline())
                             .observeOn(Schedulers.trampoline())
                 }

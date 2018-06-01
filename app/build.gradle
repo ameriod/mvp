@@ -1,10 +1,11 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
+
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "me.ameriod.lib.mvp.app"
@@ -27,37 +28,34 @@ android {
 }
 
 dependencies {
-    androidTestCompile(rootProject.ext.espresso, {
+    androidTestImplementation(rootProject.ext.espresso, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testCompile rootProject.ext.junit
-    testCompile rootProject.ext.mockito
+    testImplementation rootProject.ext.junit
+    testImplementation rootProject.ext.mockito
 
-    compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibVersion"
-    compile "com.android.support:cardview-v7:$rootProject.ext.supportLibVersion"
-    compile "com.android.support:design:$rootProject.ext.supportLibVersion"
-    compile "com.android.support:recyclerview-v7:$rootProject.ext.supportLibVersion"
+    implementation "com.android.support:appcompat-v7:$rootProject.ext.supportLibVersion"
+    implementation "com.android.support:cardview-v7:$rootProject.ext.supportLibVersion"
+    implementation "com.android.support:design:$rootProject.ext.supportLibVersion"
+    implementation "com.android.support:recyclerview-v7:$rootProject.ext.supportLibVersion"
 
-    compile 'com.jakewharton:butterknife:8.5.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    kapt 'com.jakewharton:butterknife-compiler:8.8.1'
 
-    compile 'frankiesardo:icepick:3.2.0'
-    annotationProcessor 'frankiesardo:icepick-processor:3.2.0'
+    implementation 'com.github.castorflex.smoothprogressbar:library:1.1.0'
 
-    compile 'com.github.castorflex.smoothprogressbar:library:1.1.0'
+    implementation rootProject.ext.gson
+    implementation rootProject.ext.retrofit2
+    implementation rootProject.ext.retrofit2ConverterGson
+    implementation rootProject.ext.retrofit2AdapterRxJava2
+    implementation rootProject.ext.okHttp
+    implementation rootProject.ext.okHttpLogging
+    implementation rootProject.ext.timber
 
-    annotationProcessor 'com.google.auto.value:auto-value:1.4'
-    annotationProcessor 'com.ryanharter.auto.value:auto-value-gson:0.4.6'
-    provided 'com.ryanharter.auto.value:auto-value-gson:0.4.6'
-    annotationProcessor 'com.ryanharter.auto.value:auto-value-parcel:0.2.5'
+    implementation rootProject.ext.conductor
+    implementation rootProject.ext.conductorSupport
 
-    compile rootProject.ext.gson
-    compile rootProject.ext.retrofit2
-    compile rootProject.ext.retrofit2ConverterGson
-    compile rootProject.ext.retrofit2AdapterRxJava2
-    compile rootProject.ext.okHttp
-    compile rootProject.ext.okHttpLogging
-
-    compile project(':lib')
-    compile project(':presenterRx2')
+    implementation project(':lib')
+    implementation project(':presenterRx2')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

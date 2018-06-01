@@ -2,8 +2,6 @@ package me.ameriod.lib.mvp.app.person
 
 import android.content.Context
 import android.os.Bundle
-import icepick.Icepick
-import icepick.State
 import me.ameriod.lib.mvp.Mvp
 import me.ameriod.lib.mvp.app.api.NetworkErrorHandler
 import me.ameriod.lib.mvp.app.models.Person
@@ -16,17 +14,14 @@ class PersonPresenter(scheduler: IObservableSchedulerRx2, errorHandler: Mvp.Erro
     constructor(context: Context, id: String) : this(IObservableSchedulerRx2.SUBSCRIBE_IO_OBSERVE_ANDROID_MAIN,
             NetworkErrorHandler(context), PersonInteractor(id))
 
-    @JvmField @State
     internal var person: Person? = null
 
     override fun saveState(outState: Bundle) {
         super.saveState(outState)
-        Icepick.saveInstanceState(this, outState)
     }
 
     override fun restoreState(savedState: Bundle) {
         super.restoreState(savedState)
-        Icepick.restoreInstanceState(this, savedState)
     }
 
     override fun getPerson() {

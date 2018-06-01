@@ -2,8 +2,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
+
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
@@ -23,19 +23,19 @@ android {
 }
 
 dependencies {
-    androidTestCompile(rootProject.ext.espresso, {
+    androidTestImplementation(rootProject.ext.espresso, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testCompile rootProject.ext.junit
-    testCompile rootProject.ext.mockito
+    testImplementation rootProject.ext.junit
+    testImplementation rootProject.ext.mockito
 
-    compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibVersion"
+    implementation "com.android.support:appcompat-v7:$rootProject.ext.supportLibVersion"
 
-    compile rootProject.ext.conductor
-    compile rootProject.ext.conductorSupport
+    implementation rootProject.ext.conductor
+    implementation rootProject.ext.conductorSupport
 
-    compile rootProject.ext.timber
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation rootProject.ext.timber
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
 }
 repositories {

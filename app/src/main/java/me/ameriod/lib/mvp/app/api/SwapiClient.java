@@ -2,7 +2,6 @@ package me.ameriod.lib.mvp.app.api;
 
 import android.support.annotation.NonNull;
 
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import io.reactivex.Observable;
@@ -32,9 +31,8 @@ public class SwapiClient implements SwapiService {
                         .addInterceptor(new HttpLoggingInterceptor()
                                 .setLevel(HttpLoggingInterceptor.Level.BODY))
                         .build())
-                .baseUrl("http://swapi.co/api/")
+                .baseUrl("https://swapi.co/api/")
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder()
-                        .registerTypeAdapterFactory(SwapiAdapterFactory.create())
                         .create()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build().create(SwapiService.class));
