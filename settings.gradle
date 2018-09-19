@@ -1,1 +1,1 @@
-include ':app', ':lib', ':presenterRx2'
+include ':app', ':lib', ':presenterRx2', ':error'
