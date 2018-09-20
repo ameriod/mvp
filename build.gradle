@@ -43,7 +43,7 @@ ext {
 
     timber = "com.jakewharton.timber:timber:4.5.1"
 
-    conductorVersion = "2.1.1"
+    conductorVersion = "2.1.5"
     conductor= "com.bluelinelabs:conductor:$conductorVersion"
     conductorSupport = "com.bluelinelabs:conductor-support:$conductorVersion"
 

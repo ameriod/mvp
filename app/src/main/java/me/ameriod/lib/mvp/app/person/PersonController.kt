@@ -4,13 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import kotlinx.android.synthetic.main.person_controller.view.*
-import me.ameriod.lib.mvp.app.BaseControllerMvp
 import me.ameriod.lib.mvp.app.R
 import me.ameriod.lib.mvp.app.models.Person
+import me.ameriod.lib.mvp.view.MvpController
 
-class PersonController(args: Bundle?) : BaseControllerMvp<PersonContract.View, PersonContract.Presenter>(args), PersonContract.View {
+class PersonController(args: Bundle?) : MvpController<PersonContract.View, PersonContract.Presenter>(args), PersonContract.View {
 
     private var mId: String? = null
 
@@ -54,10 +53,6 @@ class PersonController(args: Bundle?) : BaseControllerMvp<PersonContract.View, P
         } else {
             view!!.person_loading_view.hide()
         }
-    }
-
-    override fun displayError(error: String) {
-        Toast.makeText(applicationContext, error, Toast.LENGTH_LONG).show()
     }
 
     override fun createPresenter(): PersonContract.Presenter {

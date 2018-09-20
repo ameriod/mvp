@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 
 import io.reactivex.functions.Consumer;
+import me.ameriod.lib.error.Error;
 import me.ameriod.lib.mvp.Mvp;
 import me.ameriod.lib.mvp.app.api.NetworkErrorHandler;
 import me.ameriod.lib.mvp.app.models.PeopleResponse;
@@ -93,7 +94,7 @@ public class PeoplePresenter extends BasePresenterRx2<PeopleContract.View> imple
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(@NonNull Throwable throwable) throws Exception {
-                        getView().displayError(getErrorHandler().onError(throwable));
+                        getView().displayErrorMessage(new Error.ToastMessage(getErrorHandler().onError(throwable)));
                         getView().showProgress(false);
                     }
                 }));

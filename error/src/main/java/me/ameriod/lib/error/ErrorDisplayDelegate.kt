@@ -1,4 +1,13 @@
 package me.ameriod.lib.error
 
-class ErrorDisplayDelegate {
+import android.view.View
+
+interface ErrorDisplayDelegate {
+
+    fun displayError(error: Error<*>)
+
+    fun attachView(view: View)
+
+    fun detachView()
+
 }

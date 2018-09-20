@@ -2,35 +2,28 @@ package me.ameriod.lib.error
 
 import android.view.View
 
-class ErrorDisplayDelegateImpl {
+class ErrorDisplayDelegateImpl : ErrorDisplayDelegate {
 
     private var view: View? = null
-    private var error: Error<in Any>? = null
+    private var currentError: Error<in Any>? = null
 
     @Suppress("UNCHECKED_CAST")
-    fun displayError(newError: Error<*>) {
-        error?.remove(error)
-        error = view?.let {
-            (newError as Error<Any>)
+    override fun displayError(error: Error<*>) {
+        currentError?.remove(currentError)
+        currentError = view?.let {
+            (error as Error<Any>)
                     .apply { show(it) }
         }
     }
 
-    fun displaySnackBar(message: CharSequence) {
-        displayError(Error.SnackbarMessage(message))
-    }
 
-    fun displayToast(message: CharSequence) {
-        displayError(Error.ToastMessage(message))
-    }
-
-    fun attachView(view: View) {
+    override fun attachView(view: View) {
         this.view = view
     }
 
-    fun deatchView() {
-        error?.remove(error)
-        error = null
+    override fun detachView() {
+        currentError?.remove(currentError)
+        currentError = null
         view = null
     }
 }

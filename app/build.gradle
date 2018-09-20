@@ -50,8 +50,9 @@ dependencies {
     implementation rootProject.ext.conductor
     implementation rootProject.ext.conductorSupport
 
+    implementation project(':error')
     implementation project(':lib')
     implementation project(':presenterRx2')
-    implementation project(':error')
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

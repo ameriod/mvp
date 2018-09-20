@@ -61,8 +61,6 @@ interface Mvp {
      */
     interface ErrorHandler {
         fun onError(e: Throwable): String
-
-        fun onErrorObject(e: Throwable) : Error<*>
     }
 
 }

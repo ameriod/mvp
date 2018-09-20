@@ -6,9 +6,10 @@ import android.content.Context
 import android.os.Build
 import android.os.Parcelable
 import android.util.AttributeSet
-import android.view.ViewGroup
 import android.widget.FrameLayout
-
+import me.ameriod.lib.error.Error
+import me.ameriod.lib.error.ErrorDisplayDelegate
+import me.ameriod.lib.error.ErrorDisplayDelegateImpl
 import me.ameriod.lib.mvp.Mvp
 import me.ameriod.lib.mvp.deligate.ViewGroupDelegateImpl
 import me.ameriod.lib.mvp.deligate.ViewGroupMvpDelegateCallback
@@ -18,6 +19,7 @@ abstract class MvpFrameLayout<V : Mvp.View, P : Mvp.Presenter<V>> : FrameLayout,
         ViewGroupMvpDelegateCallback<V, P> {
 
     private var delegate: ViewMvpDelegate<V, P>? = null
+    private var errorDisplayDelegate: ErrorDisplayDelegate? = null
 
     constructor(context: Context) : super(context, null) {
         this.init(context)
@@ -44,11 +46,17 @@ abstract class MvpFrameLayout<V : Mvp.View, P : Mvp.Presenter<V>> : FrameLayout,
             delegate = ViewGroupDelegateImpl(this)
         }
         delegate!!.onAttachedToWindow()
+
+        if (errorDisplayDelegate == null) {
+            errorDisplayDelegate = ErrorDisplayDelegateImpl()
+        }
+        errorDisplayDelegate!!.attachView(this)
     }
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         delegate!!.onDetachedFromWindow()
+        errorDisplayDelegate!!.detachView()
     }
 
     @SuppressLint("MissingSuperCall")
@@ -78,5 +86,16 @@ abstract class MvpFrameLayout<V : Mvp.View, P : Mvp.Presenter<V>> : FrameLayout,
 
     override fun superOnRestoreInstanceState(state: Parcelable) {
         super.onRestoreInstanceState(state)
+    }
+
+
+    fun getErrorDisplayDelegate(): ErrorDisplayDelegate = errorDisplayDelegate!!
+
+    override fun displayErrorMessage(error: Error<*>) {
+        errorDisplayDelegate!!.displayError(error)
+    }
+
+    override fun displayError(error: String) {
+        displayErrorMessage(Error.SnackbarMessage(error))
     }
 }

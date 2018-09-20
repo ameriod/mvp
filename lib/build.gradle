@@ -28,14 +28,16 @@ dependencies {
     testImplementation rootProject.ext.mockito
 
     implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
+    implementation 'com.google.android.material:material:1.0.0-alpha1'
+
+    implementation project(':error')
 
     implementation rootProject.ext.conductor
     implementation rootProject.ext.conductorSupport
 
     implementation rootProject.ext.timber
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api project(':error')
 
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 repositories {
     mavenCentral()

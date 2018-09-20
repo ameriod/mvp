@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.bluelinelabs.conductor.RouterTransaction;
 import com.bluelinelabs.conductor.changehandler.HorizontalChangeHandler;
@@ -12,17 +11,16 @@ import com.bluelinelabs.conductor.changehandler.HorizontalChangeHandler;
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import me.ameriod.lib.mvp.app.BaseControllerMvp;
 import me.ameriod.lib.mvp.app.R;
 import me.ameriod.lib.mvp.app.RecyclerViewEndlessScrollListener;
 import me.ameriod.lib.mvp.app.models.Person;
 import me.ameriod.lib.mvp.app.person.PersonController;
+import me.ameriod.lib.mvp.view.MvpController;
 
-public class PeopleController extends BaseControllerMvp<PeopleContract.View, PeopleContract.Presenter>
+public class PeopleController extends MvpController<PeopleContract.View, PeopleContract.Presenter>
         implements PeopleContract.View, PeopleAdapter.OnPersonClickedListener,
         RecyclerViewEndlessScrollListener.OnScrollToEndListener {
 
@@ -70,11 +68,6 @@ public class PeopleController extends BaseControllerMvp<PeopleContract.View, Peo
     @Override
     public void showProgress(boolean show) {
         loading.setVisibility(show ? View.VISIBLE : View.GONE);
-    }
-
-    @Override
-    public void displayError(@Nullable String error) {
-        Toast.makeText(getApplicationContext(), error, Toast.LENGTH_LONG).show();
     }
 
     @NonNull

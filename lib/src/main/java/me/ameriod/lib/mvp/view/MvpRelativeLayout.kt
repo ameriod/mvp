@@ -8,6 +8,9 @@ import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.ViewGroup
 import android.widget.RelativeLayout
+import me.ameriod.lib.error.Error
+import me.ameriod.lib.error.ErrorDisplayDelegate
+import me.ameriod.lib.error.ErrorDisplayDelegateImpl
 
 import me.ameriod.lib.mvp.Mvp
 import me.ameriod.lib.mvp.deligate.ViewGroupDelegateImpl
@@ -18,6 +21,7 @@ abstract class MvpRelativeLayout<V : Mvp.View, P : Mvp.Presenter<V>> : RelativeL
         ViewGroupMvpDelegateCallback<V, P> {
 
     private var delegate: ViewMvpDelegate<V, P>? = null
+    private var errorDisplayDelegate : ErrorDisplayDelegate? = null
 
     constructor(context: Context) : super(context) {
         this.init(context)
@@ -44,11 +48,17 @@ abstract class MvpRelativeLayout<V : Mvp.View, P : Mvp.Presenter<V>> : RelativeL
             delegate = ViewGroupDelegateImpl(this)
         }
         delegate!!.onAttachedToWindow()
+
+        if (errorDisplayDelegate == null) {
+            errorDisplayDelegate = ErrorDisplayDelegateImpl()
+        }
+        errorDisplayDelegate!!.attachView(this)
     }
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         delegate!!.onDetachedFromWindow()
+        errorDisplayDelegate!!.detachView()
     }
 
     @SuppressLint("MissingSuperCall")
@@ -78,5 +88,16 @@ abstract class MvpRelativeLayout<V : Mvp.View, P : Mvp.Presenter<V>> : RelativeL
 
     override fun superOnRestoreInstanceState(state: Parcelable) {
         super.onRestoreInstanceState(state)
+    }
+
+
+    fun getErrorDisplayDelegate() : ErrorDisplayDelegate = errorDisplayDelegate!!
+
+    override fun displayErrorMessage(error: Error<*>) {
+        errorDisplayDelegate!!.displayError(error)
+    }
+
+    override fun displayError(error: String) {
+        displayErrorMessage(Error.SnackbarMessage(error))
     }
 }

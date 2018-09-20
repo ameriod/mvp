@@ -7,6 +7,8 @@ import android.view.ViewGroup
 
 import com.bluelinelabs.conductor.Controller
 import me.ameriod.lib.error.Error
+import me.ameriod.lib.error.ErrorDisplayDelegate
+import me.ameriod.lib.error.ErrorDisplayDelegateImpl
 
 import me.ameriod.lib.mvp.Mvp
 import me.ameriod.lib.mvp.deligate.ControllerDelegate
@@ -17,6 +19,7 @@ abstract class MvpController<V : Mvp.View, P : Mvp.Presenter<V>> : Controller, M
         ControllerDelegateCallback<V, P> {
 
     private var controllerDelegate: ControllerDelegate<V, P>? = null
+    private var errorDisplayDelegate : ErrorDisplayDelegate? = null
 
     constructor() : super()
 
@@ -30,7 +33,14 @@ abstract class MvpController<V : Mvp.View, P : Mvp.Presenter<V>> : Controller, M
             controllerDelegate = ControllerDelegateImpl(this)
         }
         controllerDelegate!!.onCreateView()
+
+        if (errorDisplayDelegate == null) {
+            errorDisplayDelegate = ErrorDisplayDelegateImpl()
+        }
+        errorDisplayDelegate!!.attachView(view)
+
         onPostCreateView(view, container)
+
         return view
     }
 
@@ -49,6 +59,7 @@ abstract class MvpController<V : Mvp.View, P : Mvp.Presenter<V>> : Controller, M
     override fun onDestroyView(view: View) {
         super.onDestroyView(view)
         controllerDelegate!!.onDestroyView()
+        errorDisplayDelegate!!.detachView()
     }
 
     abstract override fun createPresenter(): P
@@ -62,12 +73,13 @@ abstract class MvpController<V : Mvp.View, P : Mvp.Presenter<V>> : Controller, M
         return this as V
     }
 
-    override fun displayErrorMessage(error: Error<*>) {
+    fun getErrorDisplayDelegate() : ErrorDisplayDelegate = errorDisplayDelegate!!
 
+    override fun displayErrorMessage(error: Error<*>) {
+        errorDisplayDelegate!!.displayError(error)
     }
 
-    @Suppress("UNCHECKED_CAST")
     override fun displayError(error: String) {
-        displayErrorMessage(Error.SnackbarMessage(error) as Error<Any>)
+        displayErrorMessage(Error.SnackbarMessage(error))
     }
 }
