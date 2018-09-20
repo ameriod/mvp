@@ -6,13 +6,14 @@ class ErrorDisplayDelegateImpl : ErrorDisplayDelegate {
 
     private var view: View? = null
     private var currentError: Error<in Any>? = null
+    private var currentDisplay: Any? = null
 
     @Suppress("UNCHECKED_CAST")
     override fun displayError(error: Error<*>) {
         currentError?.remove(currentError)
-        currentError = view?.let {
-            (error as Error<Any>)
-                    .apply { show(it) }
+        view?.apply {
+            currentError = error as Error<in Any>
+            currentDisplay = currentError?.show(this)
         }
     }
 
@@ -22,8 +23,9 @@ class ErrorDisplayDelegateImpl : ErrorDisplayDelegate {
     }
 
     override fun detachView() {
-        currentError?.remove(currentError)
+        currentError?.remove(currentDisplay)
         currentError = null
+        currentDisplay = null
         view = null
     }
 }
