@@ -33,6 +33,18 @@ sealed class Error<T> {
     data class ToastMessage internal constructor(private val message: Text,
                                                  private val duration: Int = Toast.LENGTH_SHORT) : Error<Toast>() {
 
+        constructor(message: CharSequence) : this(Text(message))
+
+        constructor(@StringRes messageResId: Int) : this(Text(messageResId))
+
+        init {
+            if (duration != Toast.LENGTH_SHORT ||
+                    duration != Toast.LENGTH_LONG) {
+                throw IllegalArgumentException("Error need to have duration as: Toast.LENGTH_LONG OR Toast.LENGTH_SHORT")
+
+            }
+        }
+
         @SuppressLint("ShowToast")
         override fun show(view: View): Toast =
                 message.let {
@@ -52,6 +64,18 @@ sealed class Error<T> {
     data class SnackbarMessage internal constructor(private val message: Text,
                                                     private val duration: Int = Snackbar.LENGTH_SHORT,
                                                     private val action: Action? = null) : Error<Snackbar>() {
+
+        constructor(message: CharSequence) : this(Text(message))
+
+        constructor(@StringRes messageResId: Int) : this(Text(messageResId))
+
+        init {
+            if (duration != Snackbar.LENGTH_INDEFINITE ||
+                    duration != Snackbar.LENGTH_LONG ||
+                    duration != Snackbar.LENGTH_SHORT) {
+                throw IllegalArgumentException("Error need to have duration as: Snackbar.LENGTH_INDEFINITE, Snackbar.LENGTH_LONG OR Snackbar.LENGTH_SHORT")
+            }
+        }
 
         override fun show(view: View): Snackbar {
             val snackbar = if (message.text != null) {
@@ -87,7 +111,7 @@ sealed class Error<T> {
         override fun show(view: View): AlertDialog {
             val builder = AlertDialog.Builder(view.context)
                     .setCancelable(cancellable)
-            
+
             title?.apply {
                 if (text != null) {
                     builder.setTitle(title.text)

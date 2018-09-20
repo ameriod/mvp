@@ -1,6 +1,7 @@
 package me.ameriod.lib.mvp
 
 import android.os.Bundle
+import me.ameriod.lib.error.Error
 
 /**
  * The base interfaces for the Presenter and the View.
@@ -51,6 +52,8 @@ interface Mvp {
         fun showProgress(show: Boolean)
 
         fun displayError(error: String)
+
+        fun displayErrorMessage(error: Error<*>)
     }
 
     /**
@@ -58,5 +61,8 @@ interface Mvp {
      */
     interface ErrorHandler {
         fun onError(e: Throwable): String
+
+        fun onErrorObject(e: Throwable) : Error<*>
     }
+
 }

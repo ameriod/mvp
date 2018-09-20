@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.bluelinelabs.conductor.Controller
+import me.ameriod.lib.error.Error
 
 import me.ameriod.lib.mvp.Mvp
 import me.ameriod.lib.mvp.deligate.ControllerDelegate
@@ -59,5 +60,14 @@ abstract class MvpController<V : Mvp.View, P : Mvp.Presenter<V>> : Controller, M
     @Suppress("UNCHECKED_CAST")
     override fun getMvpView(): V {
         return this as V
+    }
+
+    override fun displayErrorMessage(error: Error<*>) {
+
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    override fun displayError(error: String) {
+        displayErrorMessage(Error.SnackbarMessage(error) as Error<Any>)
     }
 }
